@@ -1,12 +1,12 @@
 <html>
     <head>
         <script>
-            // change the script such that i=0,1,2,3,4 is logged in the console
             for (var i = 0; i < 5; i++) {
-                // setTimeout executes the function after 5 ms
-                setTimeout(function() {
-                    console.log(i);
-                }, 0);
+                (function(currentI) {
+                    setTimeout(function() {
+                        console.log(currentI);
+                    }, 5);
+                })(i);
             }
         </script>
     </head>

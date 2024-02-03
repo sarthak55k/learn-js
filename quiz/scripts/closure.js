@@ -1,13 +1,13 @@
-function setColor(set) {
-        let changeColor = set;
-        if(changeColor) {
+function setColor() {
+    let toggle = true; // Assuming toggle is meant to control whether the color change is allowed
+    return function() {
+        if (toggle) {
             let userColor = document.getElementById('color').value;
             document.getElementById('myPara').style.color = userColor;
         }
-        
+    };
 }
 
 window.onload = function() {
-    let toggle = true;
-    document.getElementById('btn').onclick = setColor(toggle);
+    document.getElementById('btn').onclick = setColor();
 }
