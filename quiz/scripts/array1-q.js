@@ -8,25 +8,31 @@ window.onload = function() {
     const MAX_HISTORY = 5;
 
     btn.onclick = () => {
-    // we will only allow a term to be entered if the search input isn't empty
-      if (inp.value !== '') {
-              // empty the list so that we don't display duplicate entries
-              // the display is regenerated every time a search term is entered.
-              list.innerHTML = '';
+        if (inp.value !== '') {
+            // Add the new value to the history array
+            myHistory.push(inp.value);
 
-              // loop through the sorted array, and display all the search terms in the list
-              for (const itemText of myHistoryCopy) {
-                
-              }
+            // If the array length is 5 or more, remove the oldest search term
+            while (myHistory.length > MAX_HISTORY) {
+                myHistory.shift(); // Remove the first item from the history array
+            }
 
-              // If the array length is 5 or more, remove the oldest search term
-              if (myHistory.length >= MAX_HISTORY) {
-                
-              }
+            // Sort the array by the length of each item after potentially removing one
+            const myHistoryCopy = [...myHistory].sort((a, b) => a.length - b.length);
 
-              // empty the search input and focus it, ready for the next term to be entered
-              inp.value = '';
-              btn.focus();
-          }
+            // Empty the list to prevent duplicate entries
+            list.innerHTML = '';
+
+            // Loop through the sorted array, and display all the search terms in the list
+            for (const itemText of myHistoryCopy) {
+                const li = document.createElement('li');
+                li.textContent = itemText;
+                list.appendChild(li);
+            }
+
+            // Empty the search input and focus it, ready for the next term to be entered
+            inp.value = '';
+            inp.focus();
+        }
     }
 }
